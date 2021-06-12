@@ -1,0 +1,44 @@
+flask db init
+
+flask db migrate
+
+flask db upgrade   -->> this runs the script in migration/versions to upgrade
+flask db downgrade -->> this runs the script in migration/versions to downgrade
+
+
+*=================
+If u have migrated and yet to upgrade, you can delete the script generated and that's fine.
+
+when we change some details, we can do ::: flask db migrate
+
+check current version
+select * from alembic_version
+
+
+if downgrade complains of constraints name:  go to the data grip and get constraints name and replace None with it
+**** USE THE ANY NAME YOU CHOSE OR
+=========
+        OR use script to get the name
+        ==========
+
+this is for postgres
+SELECT con.*
+       FROM pg_catalog.pg_constraint con
+            INNER JOIN pg_catalog.pg_class rel
+                       ON rel.oid = con.conrelid
+            INNER JOIN pg_catalog.pg_namespace nsp
+                       ON nsp.oid = connamespace
+       WHERE nsp.nspname = '<schema name>'
+             AND rel.relname = '<table name>';
+
+
+To add message:::
+    flask db migrate -m "Adding unique constraints"
+
+
+
+clean-slate    --- delete versions and alembic table
+
+==================================
+Maintaining same naming convection across all dbs, we can do as shown in db.py
+==================================

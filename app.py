@@ -23,6 +23,8 @@ app.config["PROPAGATE_EXCEPTIONS"] = True
 app.secret_key = "jose"
 api = Api(app)
 jwt = JWTManager(app)
+db.init_app(app)
+ma.init_app(app)
 migrate = Migrate(app, db)
 
 
@@ -41,6 +43,6 @@ api.add_resource(User, "/user/<int:user_id>")
 api.add_resource(UserLogin, "/login")
 
 if __name__ == "__main__":
-    db.init_app(app)
-    ma.init_app(app)
+    # db.init_app(app)
+    # ma.init_app(app)
     app.run(port=5000, debug=True)
