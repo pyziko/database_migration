@@ -13,6 +13,7 @@ python-dotenv = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 marshmallow = "*"
+flask-migrate = "*"
 
 [dev-packages]
 
